@@ -11,11 +11,9 @@ sudo docker compose run artisan migrate
 
 sudo docker compose run artisan db:seed
 
-sudo cd ./src
+sudo chmod -R gu+w ./src/storage
 
-sudo chmod -R gu+w storage
-
-sudo chmod -R guo+w storage
+sudo chmod -R guo+w ./src/storage
 
 echo ""
 echo ""
