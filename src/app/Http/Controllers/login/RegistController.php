@@ -28,13 +28,11 @@ class RegistController extends LoginController
             return back()->withErrors('Пароли не совподают!');
         }
 
-        $data['password'] = Hash::make($data['password']);
-
         User::query()
         ->where('login', '!=', $data['username'])
         ->create([
             'login' => $data['username'],
-            'password' => $data['password'],
+            'password' => Hash::make($data['password']),
         ]);
 
         $isLogin = $this->login($data['username'], $data['password']);

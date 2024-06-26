@@ -24,6 +24,8 @@
             </div>
 
             <input class="form__submit" type="submit">
+
+            <a href="{{ route('login') }}" class="login">Уже есть аккаунт?</a>
         </form>
     </div>
 @endsection

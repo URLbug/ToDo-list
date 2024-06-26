@@ -17,6 +17,18 @@ class LoginController extends Controller
 
     function store(Request $request): RedirectResponse
     {
+        $data = $request->validate([
+            'username' => 'string|required|max:255|min:2',
+            'password' => 'string|required|max:255|min:6',
+        ]);
+
+        $isLogin = $this->login($data['username'], $data['password']);
+
+        if(!$isLogin)
+        {
+            return back()->withErrors('Не верный логин или пароль!');
+        }
+
         return redirect()->route('home');
     }
 
@@ -33,5 +45,12 @@ class LoginController extends Controller
             'password'=> $password,
         ],
         true);
+    }
+
+    function logout(): RedirectResponse
+    {
+        Auth::logout();
+
+        return redirect()->route('login');
     }
 }

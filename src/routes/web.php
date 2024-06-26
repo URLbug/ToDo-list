@@ -7,7 +7,23 @@ Route::namespace('App\\Http\\Controllers')
     /**
      * Home logics
      */
-    Route::get('/', 'IndexController@index')->name('home');
+    Route::middleware('auth')->group(function() {
+        Route::get(
+            '/', 
+            'IndexController@index'
+        )->name('home');
+        
+        Route::post(
+            '/',
+            'IndexController@store',
+        );
+
+        Route::get(
+            '/delete/{delete}',
+            'IndexController@delete',
+        )->name('delete');
+    });
+    
     
 
     /**
@@ -18,10 +34,15 @@ Route::namespace('App\\Http\\Controllers')
         'login\LoginController@index'
     )->name('login');
 
+    Route::get(
+        '/logout', 
+        'login\LoginController@logout'
+    )->name('logout');
+
     Route::post(
         '/login', 
         'login\LoginController@store'
-    )->name('login');
+    );
     
 
     /**
@@ -35,7 +56,7 @@ Route::namespace('App\\Http\\Controllers')
     Route::post(
         '/regist', 
         'login\RegistController@store'
-    )->name('regist');
+    );
 });
 
 

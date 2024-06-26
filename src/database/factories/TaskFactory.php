@@ -2,16 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
  */
-class UserFactory extends Factory
+class TaskFactory extends Factory
 {
-
     /**
      * Define the model's default state.
      *
@@ -19,9 +17,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $usersId = User::all(['id',])->toArray();
+
         return [
-            'login' => fake()->name(),
-            'password' => Hash::make('password'),
+            'usersId' => array_rand($usersId),
+            'name' => fake()->text(),
         ];
     }
 }
