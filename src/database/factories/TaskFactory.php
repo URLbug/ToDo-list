@@ -17,10 +17,8 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
-        $usersId = User::all(['id',])->toArray();
-
         return [
-            'usersId' => array_rand($usersId),
+            'usersId' => 1,
             'name' => fake()->text(),
         ];
     }
